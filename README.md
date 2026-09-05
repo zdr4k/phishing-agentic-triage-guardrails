@@ -1,0 +1,1 @@
+Lab about guardrails in agentic SOC.
