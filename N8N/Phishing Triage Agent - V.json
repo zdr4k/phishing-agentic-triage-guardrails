@@ -1,0 +1,339 @@
+{
+  "name": "Phishing Triage Agent - V1",
+  "nodes": [
+    {
+      "parameters": {
+        "model": "qwen3:8b",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOllama",
+      "typeVersion": 1,
+      "position": [
+        -496,
+        400
+      ],
+      "id": "d72f40d3-cd5d-4547-bdfc-d2b309bdb847",
+      "name": "Ollama Chat Model",
+      "credentials": {
+        "ollamaApi": {
+          "id": "BFkxLaD4dFAUNsBM",
+          "name": "Ollama account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -624,
+        0
+      ],
+      "id": "99024ae2-0b9b-46df-8788-9d6dd45dee3a",
+      "name": "When clicking ‘Execute workflow’",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "schemaType": "manual",
+        "inputSchema": "{\n  \"type\": \"object\",\n  \"properties\": {\n    \"verdict\": {\n      \"type\": \"string\",\n      \"enum\": [\"malicious\", \"suspicious\", \"benign\"],\n      \"description\": \"Triage classification for the reported email\"\n    },\n    \"confidence\": {\n      \"type\": \"string\",\n      \"enum\": [\"high\", \"medium\", \"low\"]\n    },\n    \"reasoning\": {\n      \"type\": \"string\",\n      \"description\": \"Short explanation of the verdict, two or three sentences\"\n    },\n    \"indicators\": {\n      \"type\": \"array\",\n      \"items\": { \"type\": \"string\" },\n      \"description\": \"Domains, URLs or IPs observed in the email\"\n    }\n  },\n  \"required\": [\"verdict\", \"confidence\", \"reasoning\"]\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        176,
+        320
+      ],
+      "id": "e992a172-1d70-4518-8f50-3071d62cdcf2",
+      "name": "Structured Output Parser"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "13e0f5a2-7999-4f53-b148-0cd2726dc586",
+              "leftValue": "={{ $json.output.verdict }}",
+              "rightValue": "malicious",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            },
+            {
+              "id": "2a19c203-1a29-48e4-aaac-54b26d52a156",
+              "leftValue": "={{ $json.output.verdict }}",
+              "rightValue": "suspicious",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        96,
+        0
+      ],
+      "id": "c6b64e51-70f0-46bc-bcf3-01041fc7b44e",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "{\n  \"action\": \"close_ticket\",\n  \"note\": \"No action taken, user informed the email is safe\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        352,
+        128
+      ],
+      "id": "a41dc71c-fda7-4a64-9d47-0b631c048aff",
+      "name": "close_case"
+    },
+    {
+      "parameters": {
+        "toolDescription": "Look up existing urlscan.io scan results for a domain.\nReturns previous submissions and page verdicts. A total of zero means\nthe domain has never been scanned, which is common for newly\nregistered infrastructure. Passive lookup only.",
+        "url": "https://urlscan.io/api/v1/search/",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "q",
+              "value": "=domain:{{ $fromAI('domain', 'the domain to look up, without protocol or path', 'string') }}"
+            },
+            {
+              "name": "size",
+              "value": "5"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.5,
+      "position": [
+        -144,
+        432
+      ],
+      "id": "8cfd2d97-4672-49a5-bc65-3926889beb53",
+      "name": "check_url"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "{\n  \"action\": \"quarantine\",\n  \"escalated_to\": \"soc-tier2\",\n  \"note\": \"Email quarantined and SOC notified\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        352,
+        -96
+      ],
+      "id": "72b276cd-68a3-47a8-b2db-7716baf7302a",
+      "name": "quarantine_and_alert"
+    },
+    {
+      "parameters": {
+        "toolDescription": "Send the triage reply to the user who reported the email.",
+        "method": "POST",
+        "url": "http://localhost:5678/webhook/mock-mail",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "to",
+              "value": "={{ $fromAI('to', 'who should receive the triage reply', 'string') }}"
+            },
+            {
+              "name": "subject",
+              "value": "={{ $fromAI('subject', 'subject line', 'string') }}"
+            },
+            {
+              "name": "body",
+              "value": "={{ $fromAI('body', 'the verdict and reasoning', 'string') }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.5,
+      "position": [
+        -320,
+        464
+      ],
+      "id": "f863d2d4-11af-4e21-94ce-55f61eb49842",
+      "name": "send_reply"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=From: {{ $json.from }}\nSubject: {{ $json.subject }}\n\nBody:\n{{ $json.body }}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "You are a phishing triage analyst for the security team.\n\nA user has forwarded a suspicious email for review.\n\nFollow these steps in order:\n1. Read the email and identify any domains, URLs or IP addresses.\n2. Use check_url and check_ip to look up what you found.\n3. Use send_reply to answer the user who forwarded the email.\n4. Return your final verdict.\n\nYou must call send_reply before returning your verdict. The user has\nno way to see your conclusion otherwise."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        -320,
+        0
+      ],
+      "id": "72aaf61b-8108-4ad0-9581-33db2eea494c",
+      "name": "Phishing Triage Agent"
+    },
+    {
+      "parameters": {
+        "toolDescription": "Look up geolocation and network ownership for an IPv4 address.\nReturns country, ISP, organization and ASN.",
+        "url": "http://ip-api.com/json/{ip}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.5,
+      "position": [
+        0,
+        416
+      ],
+      "id": "2c11eb22-adf6-419e-99da-4d081806f463",
+      "name": "check_ip"
+    }
+  ],
+  "pinData": {
+    "When clicking ‘Execute workflow’": [
+      {
+        "json": {
+          "from": "billing@acme-invoices.com",
+          "subject": "Invoice #4417 overdue",
+          "body": "Hello,\n\nYour invoice is past due.\nReview it here: http://acme-invoices.com/pay\n\nAccounts Receivable"
+        }
+      }
+    ]
+  },
+  "connections": {
+    "Ollama Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Phishing Triage Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Phishing Triage Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Phishing Triage Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "quarantine_and_alert",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "close_case",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "check_url": {
+      "ai_tool": [
+        [
+          {
+            "node": "Phishing Triage Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "send_reply": {
+      "ai_tool": [
+        [
+          {
+            "node": "Phishing Triage Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Phishing Triage Agent": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "check_ip": {
+      "ai_tool": [
+        [
+          {
+            "node": "Phishing Triage Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "74954cd1-d100-4abb-8430-f7517facf57a",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "66a4e8e44ff5c7efc7c3c52d3667546440f8fc0ccb9c21af7ba9990abb784e38"
+  },
+  "nodeGroups": [],
+  "id": "tKAr34fWY4hV7Wmn",
+  "tags": []
+}
