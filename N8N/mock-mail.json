@@ -1,0 +1,35 @@
+{
+  "name": "mock-mail",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "mock-mail",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -48,
+        -32
+      ],
+      "id": "1aa8ebf1-0281-4312-a6c5-8fcf15a57c06",
+      "name": "Webhook",
+      "webhookId": "a465dedf-4fea-4e9d-8a6a-1e2defca8825"
+    }
+  ],
+  "pinData": {},
+  "connections": {},
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "5829ce1a-d9f7-4fde-952c-bcd0fcc2c504",
+  "meta": {
+    "instanceId": "66a4e8e44ff5c7efc7c3c52d3667546440f8fc0ccb9c21af7ba9990abb784e38"
+  },
+  "nodeGroups": [],
+  "id": "Z6zf2aMHbzvoZqOm",
+  "tags": []
+}

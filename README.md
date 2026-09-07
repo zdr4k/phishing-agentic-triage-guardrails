@@ -40,7 +40,7 @@ traces/
 | | |
 |---|---|
 | n8n | 2.37.10 — workflow schema changes between releases, imports may break on other versions |
-| Model | ADD_MODEL_USED |
+| Model | qwen3:8b |
 | urlscan.io | no key needed, uses the public search endpoint |
 | ip-api.com | no key needed |
 
