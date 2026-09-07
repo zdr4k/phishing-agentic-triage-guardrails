@@ -1,0 +1,1097 @@
+{
+  "id": "42",
+  "finished": true,
+  "mode": "manual",
+  "retryOf": null,
+  "retrySuccessId": null,
+  "status": "success",
+  "createdAt": "2026-09-06T09:48:09.081Z",
+  "startedAt": "2026-09-06T09:48:09.089Z",
+  "stoppedAt": "2026-09-06T09:52:03.389Z",
+  "deletedAt": null,
+  "workflowId": "tKAr34fWY4hV7Wmn",
+  "waitTill": null,
+  "storedAt": "db",
+  "tracingContext": null,
+  "deduplicationKey": null,
+  "jsonSizeBytes": 25417,
+  "binaryDataSizeBytes": 0,
+  "workflowVersionId": "74954cd1-d100-4abb-8430-f7517facf57a",
+  "usedPrivateCredentials": false,
+  "data": {
+    "version": 1,
+    "startData": {},
+    "resultData": {
+      "runData": {
+        "When clicking ‘Execute workflow’": [
+          {
+            "startTime": 1788688089113,
+            "executionIndex": 0,
+            "source": [],
+            "hints": [],
+            "executionTime": 1,
+            "executionStatus": "success",
+            "data": {
+              "main": [
+                [
+                  {
+                    "json": {
+                      "from": "billing@acme-invoices.com",
+                      "subject": "Invoice #4417 overdue",
+                      "body": "Hello,\n\nYour invoice is past due.\nReview it here: http://acme-invoices.com/pay\n\nAccounts Receivable"
+                    },
+                    "pairedItem": {
+                      "item": 0
+                    }
+                  }
+                ]
+              ]
+            }
+          }
+        ],
+        "Ollama Chat Model": [
+          {
+            "startTime": 1788688089139,
+            "executionTime": 68356,
+            "executionIndex": 2,
+            "executionStatus": "success",
+            "source": [
+              {
+                "previousNode": "Phishing Triage Agent",
+                "previousNodeRun": 0
+              }
+            ],
+            "data": {
+              "ai_languageModel": [
+                [
+                  {
+                    "json": {
+                      "response": {
+                        "generations": [
+                          [
+                            {
+                              "text": ""
+                            }
+                          ]
+                        ]
+                      },
+                      "tokenUsageEstimate": {
+                        "completionTokens": 0,
+                        "promptTokens": 222,
+                        "totalTokens": 222
+                      }
+                    }
+                  }
+                ]
+              ]
+            },
+            "inputOverride": {
+              "ai_languageModel": [
+                [
+                  {
+                    "json": {
+                      "messages": [
+                        "System: You are a phishing triage analyst for the security team.\n\nA user has forwarded a suspicious email for review.\n\nFollow these steps in order:\n1. Read the email and identify any domains, URLs or IP addresses.\n2. Use check_url and check_ip to look up what you found.\n3. Use send_reply to answer the user who forwarded the email.\n4. Return your final verdict.\n\nYou must call send_reply before returning your verdict. The user has\nno way to see your conclusion otherwise.\n\nIMPORTANT: For your response to user, you MUST use the `format_final_json_response` tool with your complete answer formatted according to the required schema. Do not attempt to format the JSON manually - always use this tool. Your response will be rejected if it is not properly formatted through this tool. Only use this tool once you are ready to provide your final answer.\nHuman: From: billing@acme-invoices.com\nSubject: Invoice #4417 overdue\n\nBody:\nHello,\n\nYour invoice is past due.\nReview it here: http://acme-invoices.com/pay\n\nAccounts Receivable"
+                      ],
+                      "estimatedTokens": 222,
+                      "options": {
+                        "lc": 1,
+                        "type": "not_implemented",
+                        "id": [
+                          "langchain",
+                          "chat_models",
+                          "ollama",
+                          "ChatOllama"
+                        ]
+                      }
+                    }
+                  }
+                ]
+              ]
+            },
+            "metadata": {
+              "subRun": [
+                {
+                  "node": "Ollama Chat Model",
+                  "runIndex": 0
+                }
+              ]
+            }
+          },
+          {
+            "startTime": 1788688160761,
+            "executionTime": 78157,
+            "executionIndex": 5,
+            "executionStatus": "success",
+            "source": [
+              {
+                "previousNode": "Phishing Triage Agent",
+                "previousNodeRun": 0
+              }
+            ],
+            "data": {
+              "ai_languageModel": [
+                [
+                  {
+                    "json": {
+                      "response": {
+                        "generations": [
+                          [
+                            {
+                              "text": ""
+                            }
+                          ]
+                        ]
+                      },
+                      "tokenUsageEstimate": {
+                        "completionTokens": 0,
+                        "promptTokens": 325,
+                        "totalTokens": 325
+                      }
+                    }
+                  }
+                ]
+              ]
+            },
+            "inputOverride": {
+              "ai_languageModel": [
+                [
+                  {
+                    "json": {
+                      "messages": [
+                        "System: You are a phishing triage analyst for the security team.\n\nA user has forwarded a suspicious email for review.\n\nFollow these steps in order:\n1. Read the email and identify any domains, URLs or IP addresses.\n2. Use check_url and check_ip to look up what you found.\n3. Use send_reply to answer the user who forwarded the email.\n4. Return your final verdict.\n\nYou must call send_reply before returning your verdict. The user has\nno way to see your conclusion otherwise.\n\nIMPORTANT: For your response to user, you MUST use the `format_final_json_response` tool with your complete answer formatted according to the required schema. Do not attempt to format the JSON manually - always use this tool. Your response will be rejected if it is not properly formatted through this tool. Only use this tool once you are ready to provide your final answer.\nHuman: From: billing@acme-invoices.com\nSubject: Invoice #4417 overdue\n\nBody:\nHello,\n\nYour invoice is past due.\nReview it here: http://acme-invoices.com/pay\n\nAccounts Receivable\nAI: [{\"id\":\"ba7ec8b1-6cb7-4cde-a2bc-25af1d832a22\",\"name\":\"check_url\",\"args\":{\"domain\":\"acme-invoices.com\",\"id\":\"ba7ec8b1-6cb7-4cde-a2bc-25af1d832a22\"},\"type\":\"tool_call\"}]\nTool: [{\"results\":[],\"total\":0,\"took\":3039,\"has_more\":false}]"
+                      ],
+                      "estimatedTokens": 325,
+                      "options": {
+                        "lc": 1,
+                        "type": "not_implemented",
+                        "id": [
+                          "langchain",
+                          "chat_models",
+                          "ollama",
+                          "ChatOllama"
+                        ]
+                      }
+                    }
+                  }
+                ]
+              ]
+            },
+            "metadata": {
+              "subRun": [
+                {
+                  "node": "Ollama Chat Model",
+                  "runIndex": 1
+                }
+              ]
+            }
+          },
+          {
+            "startTime": 1788688238988,
+            "executionTime": 84386,
+            "executionIndex": 8,
+            "executionStatus": "success",
+            "source": [
+              {
+                "previousNode": "Phishing Triage Agent",
+                "previousNodeRun": 0
+              }
+            ],
+            "data": {
+              "ai_languageModel": [
+                [
+                  {
+                    "json": {
+                      "response": {
+                        "generations": [
+                          [
+                            {
+                              "text": ""
+                            }
+                          ]
+                        ]
+                      },
+                      "tokenUsageEstimate": {
+                        "completionTokens": 0,
+                        "promptTokens": 487,
+                        "totalTokens": 487
+                      }
+                    }
+                  }
+                ]
+              ]
+            },
+            "inputOverride": {
+              "ai_languageModel": [
+                [
+                  {
+                    "json": {
+                      "messages": [
+                        "System: You are a phishing triage analyst for the security team.\n\nA user has forwarded a suspicious email for review.\n\nFollow these steps in order:\n1. Read the email and identify any domains, URLs or IP addresses.\n2. Use check_url and check_ip to look up what you found.\n3. Use send_reply to answer the user who forwarded the email.\n4. Return your final verdict.\n\nYou must call send_reply before returning your verdict. The user has\nno way to see your conclusion otherwise.\n\nIMPORTANT: For your response to user, you MUST use the `format_final_json_response` tool with your complete answer formatted according to the required schema. Do not attempt to format the JSON manually - always use this tool. Your response will be rejected if it is not properly formatted through this tool. Only use this tool once you are ready to provide your final answer.\nHuman: From: billing@acme-invoices.com\nSubject: Invoice #4417 overdue\n\nBody:\nHello,\n\nYour invoice is past due.\nReview it here: http://acme-invoices.com/pay\n\nAccounts Receivable\nAI: [{\"id\":\"ba7ec8b1-6cb7-4cde-a2bc-25af1d832a22\",\"name\":\"check_url\",\"args\":{\"domain\":\"acme-invoices.com\",\"id\":\"ba7ec8b1-6cb7-4cde-a2bc-25af1d832a22\"},\"type\":\"tool_call\"}]\nTool: [{\"results\":[],\"total\":0,\"took\":3039,\"has_more\":false}]\nAI: [{\"id\":\"3152f56c-d8f1-4dc6-85cb-1b535ae545e6\",\"name\":\"send_reply\",\"args\":{\"body\":\"The email appears suspicious. The domain 'acme-invoices.com' was not found in any URL scans, and the context resembles a phishing attempt. Do not click the link and contact your security team for further assistance.\\n\\nIndicators: acme-invoices.com, http://acme-invoices.com/pay\",\"subject\":\"Phishing Attempt Detected\",\"to\":\"user@forwarded.com\",\"id\":\"3152f56c-d8f1-4dc6-85cb-1b535ae545e6\"},\"type\":\"tool_call\"}]\nTool: [{\"message\":\"Workflow was started\"}]"
+                      ],
+                      "estimatedTokens": 487,
+                      "options": {
+                        "lc": 1,
+                        "type": "not_implemented",
+                        "id": [
+                          "langchain",
+                          "chat_models",
+                          "ollama",
+                          "ChatOllama"
+                        ]
+                      }
+                    }
+                  }
+                ]
+              ]
+            },
+            "metadata": {
+              "subRun": [
+                {
+                  "node": "Ollama Chat Model",
+                  "runIndex": 2
+                }
+              ]
+            }
+          }
+        ],
+        "check_url": [
+          {
+            "inputOverride": {
+              "ai_tool": [
+                [
+                  {
+                    "json": {
+                      "domain": "acme-invoices.com"
+                    },
+                    "pairedItem": {
+                      "item": 0,
+                      "input": 0,
+                      "sourceOverwrite": {
+                        "previousNode": "When clicking ‘Execute workflow’",
+                        "previousNodeOutput": 0,
+                        "previousNodeRun": 0
+                      }
+                    }
+                  }
+                ]
+              ]
+            },
+            "source": [
+              {
+                "previousNode": "Phishing Triage Agent",
+                "previousNodeOutput": 0,
+                "previousNodeRun": 0
+              }
+            ],
+            "executionIndex": 3,
+            "executionTime": 3248,
+            "startTime": 1788688157498,
+            "hints": [],
+            "metadata": {
+              "preserveSourceOverwrite": true,
+              "preservedSourceOverwrite": {
+                "previousNode": "When clicking ‘Execute workflow’",
+                "previousNodeOutput": 0,
+                "previousNodeRun": 0
+              }
+            },
+            "executionStatus": "success",
+            "data": {
+              "ai_tool": [
+                [
+                  {
+                    "json": {
+                      "results": [],
+                      "total": 0,
+                      "took": 3039,
+                      "has_more": false
+                    },
+                    "pairedItem": {
+                      "item": 0
+                    }
+                  }
+                ]
+              ]
+            }
+          }
+        ],
+        "send_reply": [
+          {
+            "inputOverride": {
+              "ai_tool": [
+                [
+                  {
+                    "json": {
+                      "body": "The email appears suspicious. The domain 'acme-invoices.com' was not found in any URL scans, and the context resembles a phishing attempt. Do not click the link and contact your security team for further assistance.\n\nIndicators: acme-invoices.com, http://acme-invoices.com/pay",
+                      "subject": "Phishing Attempt Detected",
+                      "to": "user@forwarded.com"
+                    },
+                    "pairedItem": {
+                      "item": 0,
+                      "input": 0,
+                      "sourceOverwrite": {
+                        "previousNode": "When clicking ‘Execute workflow’",
+                        "previousNodeOutput": 0,
+                        "previousNodeRun": 0
+                      }
+                    }
+                  }
+                ]
+              ]
+            },
+            "source": [
+              {
+                "previousNode": "Phishing Triage Agent",
+                "previousNodeOutput": 0,
+                "previousNodeRun": 0
+              }
+            ],
+            "executionIndex": 6,
+            "executionTime": 49,
+            "startTime": 1788688238922,
+            "hints": [],
+            "metadata": {
+              "preserveSourceOverwrite": true,
+              "preservedSourceOverwrite": {
+                "previousNode": "When clicking ‘Execute workflow’",
+                "previousNodeOutput": 0,
+                "previousNodeRun": 0
+              }
+            },
+            "executionStatus": "success",
+            "data": {
+              "ai_tool": [
+                [
+                  {
+                    "json": {
+                      "message": "Workflow was started"
+                    },
+                    "pairedItem": {
+                      "item": 0
+                    }
+                  }
+                ]
+              ]
+            }
+          }
+        ],
+        "Structured Output Parser": [
+          {
+            "startTime": 1788688323377,
+            "executionTime": 2,
+            "executionIndex": 9,
+            "executionStatus": "success",
+            "source": [
+              {
+                "previousNode": "Phishing Triage Agent",
+                "previousNodeRun": 0
+              }
+            ],
+            "data": {
+              "ai_outputParser": [
+                [
+                  {
+                    "json": {
+                      "action": "parse",
+                      "response": {
+                        "output": {
+                          "verdict": "suspicious",
+                          "confidence": "medium",
+                          "reasoning": "The domain 'acme-invoices.com' shows no URL scan history, and the email's context matches common phishing patterns. Avoid clicking the link and verify with your security team.",
+                          "indicators": [
+                            "acme-invoices.com",
+                            "http://acme-invoices.com/pay"
+                          ]
+                        }
+                      }
+                    }
+                  }
+                ]
+              ]
+            },
+            "inputOverride": {
+              "ai_outputParser": [
+                [
+                  {
+                    "json": {
+                      "action": "parse",
+                      "text": "{\"output\":{\"confidence\":\"medium\",\"indicators\":[\"acme-invoices.com\",\"http://acme-invoices.com/pay\"],\"reasoning\":\"The domain 'acme-invoices.com' shows no URL scan history, and the email's context matches common phishing patterns. Avoid clicking the link and verify with your security team.\",\"verdict\":\"suspicious\"}}"
+                    }
+                  }
+                ]
+              ]
+            },
+            "metadata": {
+              "subRun": [
+                {
+                  "node": "Structured Output Parser",
+                  "runIndex": 0
+                }
+              ]
+            }
+          }
+        ],
+        "Phishing Triage Agent": [
+          {
+            "startTime": 1788688238972,
+            "executionIndex": 7,
+            "source": [
+              {
+                "previousNode": "When clicking ‘Execute workflow’",
+                "previousNodeOutput": 0,
+                "previousNodeRun": 0
+              }
+            ],
+            "hints": [],
+            "executionTime": 84409,
+            "metadata": {
+              "nodeWasResumed": true,
+              "subNodeExecutionData": {
+                "actions": [
+                  {
+                    "action": {
+                      "actionType": "ExecutionNodeAction",
+                      "nodeName": "send_reply",
+                      "input": {
+                        "body": "The email appears suspicious. The domain 'acme-invoices.com' was not found in any URL scans, and the context resembles a phishing attempt. Do not click the link and contact your security team for further assistance.\n\nIndicators: acme-invoices.com, http://acme-invoices.com/pay",
+                        "subject": "Phishing Attempt Detected",
+                        "to": "user@forwarded.com"
+                      },
+                      "type": "ai_tool",
+                      "id": "3152f56c-d8f1-4dc6-85cb-1b535ae545e6",
+                      "metadata": {
+                        "itemIndex": 0,
+                        "toolName": "send_reply",
+                        "deepseek": {
+                          "reasoningContent": "Okay, let's see. The user forwarded an email that looks suspicious. The email is from billing@acme-invoices.com with a subject about an overdue invoice. The body asks them to review it here: http://acme-invoices.com/pay. The user is asking for triage analysis.\n\nFirst, I need to follow the steps provided. Step one is to identify any domains, URLs, or IPs in the email. The email has a URL: http://acme-invoices.com/pay. So the domain here is acme-invoices.com. There's no IP address mentioned, so maybe step two is to check the URL using the check_url function. \n\nI called check_url with the domain acme-invoices.com. The response came back with total 0, which means the domain hasn't been scanned by urlscan.io. That's common for new domains. So there's no previous scan results to indicate if it's malicious or not. \n\nNext, I need to check if there are any other indicators. The email's domain is acme-invoices.com, and the URL is http://acme-invoices.com/pay. Since the URL check didn't find anything, maybe I should check the IP if there was one, but there isn't an IP here. \n\nSo, based on the information, the URL hasn't been scanned, so I can't confirm if it's malicious. However, the email is trying to trick the user into clicking a link for an invoice. That's a common phishing tactic. Even though the URL check didn't find anything, the context is suspicious. \n\nThe user might be getting a phishing email. The domain could be a fake one, and the link could lead to a malicious site. Since there's no scan results, the confidence is medium. The verdict would be suspicious because of the context and the attempt to trick the user, even without confirmed malicious activity. \n\nNow, I need to use send_reply to inform the user. The subject line should be something like \"Phishing Attempt Detected\". The body should explain that the email is suspicious, the URL wasn't found in scans, and advise not to click and contact support. \n\nThen, format the final JSON response with verdict as suspicious, confidence medium, reasoning about the email's context and lack of scan results, and the indicators as the domain and URL. Make sure to use the format_final_json_response tool correctly.\n"
+                        }
+                      }
+                    },
+                    "nodeName": "send_reply",
+                    "runIndex": 0
+                  }
+                ],
+                "metadata": {
+                  "previousRequests": [
+                    {
+                      "action": {
+                        "tool": "check_url",
+                        "toolInput": {
+                          "domain": "acme-invoices.com"
+                        },
+                        "log": "Calling check_url",
+                        "messageLog": [
+                          {
+                            "lc": 1,
+                            "type": "constructor",
+                            "id": [
+                              "langchain_core",
+                              "messages",
+                              "AIMessage"
+                            ],
+                            "kwargs": {
+                              "content": [],
+                              "tool_calls": [
+                                {
+                                  "id": "ba7ec8b1-6cb7-4cde-a2bc-25af1d832a22",
+                                  "name": "check_url",
+                                  "args": {
+                                    "domain": "acme-invoices.com",
+                                    "id": "ba7ec8b1-6cb7-4cde-a2bc-25af1d832a22"
+                                  },
+                                  "type": "tool_call"
+                                }
+                              ],
+                              "additional_kwargs": {
+                                "reasoning_content": "Okay, let's start by analyzing the email the user forwarded. The from address is billing@acme-invoices.com, and the subject is about an overdue invoice. The body has a link: http://acme-invoices.com/pay. \n\nFirst step is to identify any domains, URLs, or IPs. The URL here is http://acme-invoices.com/pay. The domain is acme-invoices.com. There's no IP address mentioned, so I'll focus on checking the domain and the URL.\n\nNext, I need to use the check_url function for the domain. The check_url function looks up the domain on urlscan.io to see if there are any previous scans or verdicts. Let me call check_url with the domain acme-invoices.com. \n\nWait, the URL in the email is http://acme-invoices.com/pay. The check_url function requires the domain without the protocol or path, so the domain is acme-invoices.com. So I'll pass that to check_url.\n\nAfter getting the results from check_url, I might find if the domain has been scanned before. If there are no scans, it might be a new domain, which could be suspicious. Also, I should check the IP address if there's any, but there's none here. \n\nWait, the from address is billing@acme-invoices.com. The domain here is the same as the link's domain. Maybe the email is from the same domain as the link, which could be a red flag. Sometimes, phishing emails use similar domains to trick users. But I need to verify.\n\nSo, I'll proceed with checking the domain via check_url. Let's say the check_url returns that the domain hasn't been scanned before (zero submissions). That would indicate it's a new domain, which is common for phishing sites. Also, the email is asking to pay an overdue invoice, which is a common phishing tactic. \n\nThen, the verdict would be suspicious because the domain is new and the email's content is typical for phishing. The confidence might be medium since there's no IP to check, but the URL's lack of scans and the email's content raise flags. \n\nI need to call send_reply to inform the user about the suspicious elements. The final verdict would be suspicious with medium confidence, explaining the reasons based on the domain's newness and the email's content.\n"
+                              },
+                              "invalid_tool_calls": [],
+                              "response_metadata": {}
+                            }
+                          }
+                        ],
+                        "toolCallId": "ba7ec8b1-6cb7-4cde-a2bc-25af1d832a22",
+                        "type": "tool_call"
+                      },
+                      "observation": "[{\"results\":[],\"total\":0,\"took\":3039,\"has_more\":false}]"
+                    }
+                  ],
+                  "itemIndex": 0,
+                  "iterationCount": 2
+                }
+              },
+              "tracing": {
+                "llm.tokens.in": 487,
+                "llm.tokens.out": 0,
+                "llm.tokens.total": 487,
+                "llm.tokens.estimated": true,
+                "ai.agent.version": "v3",
+                "ai.agent.streaming.enabled": true,
+                "ai.agent.items.total": 1,
+                "ai.agent.items.failed": 0,
+                "ai.agent.tool_calls.requested": 0,
+                "ai.agent.tool_calls.completed": 1,
+                "ai.agent.iteration.count": 0,
+                "ai.agent.memory.loads": 0,
+                "ai.agent.memory.saves": 0,
+                "ai.agent.execution.succeeded": true
+              }
+            },
+            "executionStatus": "success",
+            "data": {
+              "main": [
+                [
+                  {
+                    "json": {
+                      "output": {
+                        "verdict": "suspicious",
+                        "confidence": "medium",
+                        "reasoning": "The domain 'acme-invoices.com' shows no URL scan history, and the email's context matches common phishing patterns. Avoid clicking the link and verify with your security team.",
+                        "indicators": [
+                          "acme-invoices.com",
+                          "http://acme-invoices.com/pay"
+                        ]
+                      }
+                    },
+                    "pairedItem": {
+                      "item": 0
+                    }
+                  }
+                ]
+              ]
+            }
+          }
+        ],
+        "If": [
+          {
+            "startTime": 1788688323382,
+            "executionIndex": 10,
+            "source": [
+              {
+                "previousNode": "Phishing Triage Agent",
+                "previousNodeOutput": 0,
+                "previousNodeRun": 0
+              }
+            ],
+            "hints": [],
+            "executionTime": 4,
+            "executionStatus": "success",
+            "data": {
+              "main": [
+                [
+                  {
+                    "json": {
+                      "output": {
+                        "verdict": "suspicious",
+                        "confidence": "medium",
+                        "reasoning": "The domain 'acme-invoices.com' shows no URL scan history, and the email's context matches common phishing patterns. Avoid clicking the link and verify with your security team.",
+                        "indicators": [
+                          "acme-invoices.com",
+                          "http://acme-invoices.com/pay"
+                        ]
+                      }
+                    },
+                    "pairedItem": {
+                      "item": 0
+                    }
+                  }
+                ],
+                []
+              ]
+            }
+          }
+        ],
+        "quarantine_and_alert": [
+          {
+            "startTime": 1788688323387,
+            "executionIndex": 11,
+            "source": [
+              {
+                "previousNode": "If",
+                "previousNodeOutput": 0,
+                "previousNodeRun": 0
+              }
+            ],
+            "hints": [],
+            "executionTime": 1,
+            "executionStatus": "success",
+            "data": {
+              "main": [
+                [
+                  {
+                    "json": {
+                      "action": "quarantine",
+                      "escalated_to": "soc-tier2",
+                      "note": "Email quarantined and SOC notified"
+                    },
+                    "pairedItem": {
+                      "item": 0
+                    }
+                  }
+                ]
+              ]
+            }
+          }
+        ]
+      },
+      "pinData": {
+        "When clicking ‘Execute workflow’": [
+          {
+            "json": {
+              "from": "billing@acme-invoices.com",
+              "subject": "Invoice #4417 overdue",
+              "body": "Hello,\n\nYour invoice is past due.\nReview it here: http://acme-invoices.com/pay\n\nAccounts Receivable"
+            },
+            "pairedItem": {
+              "item": 0
+            }
+          }
+        ]
+      },
+      "lastNodeExecuted": "quarantine_and_alert"
+    },
+    "executionData": {
+      "contextData": {
+        "node:check_url": {
+          "response": {
+            "body": {
+              "results": [],
+              "total": 0,
+              "took": 3039,
+              "has_more": false
+            }
+          }
+        },
+        "node:send_reply": {
+          "response": {
+            "body": {
+              "message": "Workflow was started"
+            }
+          }
+        }
+      },
+      "nodeExecutionStack": [],
+      "metadata": {
+        "Ollama Chat Model": [
+          {
+            "subRun": [
+              {
+                "node": "Ollama Chat Model",
+                "runIndex": 0
+              }
+            ]
+          },
+          {
+            "subRun": [
+              {
+                "node": "Ollama Chat Model",
+                "runIndex": 1
+              }
+            ]
+          },
+          {
+            "subRun": [
+              {
+                "node": "Ollama Chat Model",
+                "runIndex": 2
+              }
+            ]
+          }
+        ],
+        "Structured Output Parser": [
+          {
+            "subRun": [
+              {
+                "node": "Structured Output Parser",
+                "runIndex": 0
+              }
+            ]
+          }
+        ]
+      },
+      "waitingExecution": {},
+      "waitingExecutionSource": {},
+      "runtimeData": {
+        "version": 1,
+        "establishedAt": 1788688089097,
+        "source": "manual",
+        "triggerNode": {
+          "name": "When clicking ‘Execute workflow’",
+          "type": "n8n-nodes-base.manualTrigger"
+        },
+        "redaction": {
+          "version": 2,
+          "production": false,
+          "manual": false
+        },
+        "credentials": "U2FsdGVkX1+FUXzP7ka7xdNpmAvo2od+KFBByrRzq3fNcfFTmidaHEE0AQ6VziNgKzk/Q5poeJ7W4bfdXSVOalMje1RCR81xbFvr9TT/uKOFONfedL5cvE2m4APeB7WTQW1itpErhGFwgCfJG+tUvFm7ve7f1BWKaFQsi7XBrmwFxm/GCqFp1/SUaTnH3ubv5bScRKJbE2aJApuoEp2NeN0zmZ+lAhXMChadcmSMD/G5Dw3FhIfg4KtJrkhdI945JAXpbx5iSYnrCRuIxfSC1SzgKIUvy35prIFF1gmDEO2kIqW/KRPTcxzhFF2gg9tZKdIGOSz3Wup0gJ9s8tRq2cMctY6JhWfx8Mtwb5ZTPsw/MAma5LkrHSK6J9vOsuT0ZSUqzSl7Pg3iaSWBdlas+qYDY2R6FhhD8JODOcdUCjObHiuDS9q9HVBxtKEzedq24Mj7CElg76zyCXj69BklikWg+o1zwCCrm7rAW8/mlpTopqc1t07NKE2NDpOX1S4UpeYuzHP1UmwM1UflW7B4Zw=="
+      }
+    },
+    "resumeToken": "41851285633ff58d7283a2ba2cb62710d645b38dbbadbeaa4c4cb1e253c0b269"
+  },
+  "workflowData": {
+    "id": "tKAr34fWY4hV7Wmn",
+    "name": "Phishing Triage Agent - V1",
+    "nodes": [
+      {
+        "parameters": {
+          "notice": "",
+          "model": "qwen3:8b",
+          "options": {}
+        },
+        "type": "@n8n/n8n-nodes-langchain.lmChatOllama",
+        "typeVersion": 1,
+        "position": [
+          -496,
+          400
+        ],
+        "id": "d72f40d3-cd5d-4547-bdfc-d2b309bdb847",
+        "name": "Ollama Chat Model",
+        "credentials": {
+          "ollamaApi": {
+            "id": "BFkxLaD4dFAUNsBM",
+            "name": "Ollama account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "notice": ""
+        },
+        "type": "n8n-nodes-base.manualTrigger",
+        "typeVersion": 1,
+        "position": [
+          -624,
+          0
+        ],
+        "id": "99024ae2-0b9b-46df-8788-9d6dd45dee3a",
+        "name": "When clicking ‘Execute workflow’",
+        "alwaysOutputData": true
+      },
+      {
+        "parameters": {
+          "notice": "",
+          "schemaType": "manual",
+          "inputSchema": "{\n  \"type\": \"object\",\n  \"properties\": {\n    \"verdict\": {\n      \"type\": \"string\",\n      \"enum\": [\"malicious\", \"suspicious\", \"benign\"],\n      \"description\": \"Triage classification for the reported email\"\n    },\n    \"confidence\": {\n      \"type\": \"string\",\n      \"enum\": [\"high\", \"medium\", \"low\"]\n    },\n    \"reasoning\": {\n      \"type\": \"string\",\n      \"description\": \"Short explanation of the verdict, two or three sentences\"\n    },\n    \"indicators\": {\n      \"type\": \"array\",\n      \"items\": { \"type\": \"string\" },\n      \"description\": \"Domains, URLs or IPs observed in the email\"\n    }\n  },\n  \"required\": [\"verdict\", \"confidence\", \"reasoning\"]\n}",
+          "autoFix": false
+        },
+        "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+        "typeVersion": 1.3,
+        "position": [
+          176,
+          320
+        ],
+        "id": "e992a172-1d70-4518-8f50-3071d62cdcf2",
+        "name": "Structured Output Parser"
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 3
+            },
+            "conditions": [
+              {
+                "id": "13e0f5a2-7999-4f53-b148-0cd2726dc586",
+                "leftValue": "={{ $json.output.verdict }}",
+                "rightValue": "malicious",
+                "operator": {
+                  "type": "string",
+                  "operation": "equals"
+                }
+              },
+              {
+                "id": "2a19c203-1a29-48e4-aaac-54b26d52a156",
+                "leftValue": "={{ $json.output.verdict }}",
+                "rightValue": "suspicious",
+                "operator": {
+                  "type": "string",
+                  "operation": "equals",
+                  "name": "filter.operator.equals"
+                }
+              }
+            ],
+            "combinator": "or"
+          },
+          "looseTypeValidation": false,
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.3,
+        "position": [
+          96,
+          0
+        ],
+        "id": "c6b64e51-70f0-46bc-bcf3-01041fc7b44e",
+        "name": "If"
+      },
+      {
+        "parameters": {
+          "mode": "raw",
+          "duplicateItem": false,
+          "jsonOutput": "{\n  \"action\": \"close_ticket\",\n  \"note\": \"No action taken, user informed the email is safe\"\n}",
+          "includeOtherFields": false,
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.5,
+        "position": [
+          352,
+          128
+        ],
+        "id": "a41dc71c-fda7-4a64-9d47-0b631c048aff",
+        "name": "close_case"
+      },
+      {
+        "parameters": {
+          "toolDescription": "Look up existing urlscan.io scan results for a domain.\nReturns previous submissions and page verdicts. A total of zero means\nthe domain has never been scanned, which is common for newly\nregistered infrastructure. Passive lookup only.",
+          "curlImport": "",
+          "method": "GET",
+          "url": "https://urlscan.io/api/v1/search/",
+          "authentication": "none",
+          "provideSslCertificates": false,
+          "sendQuery": true,
+          "specifyQuery": "keypair",
+          "queryParameters": {
+            "parameters": [
+              {
+                "name": "q",
+                "value": "=domain:{{ $fromAI('domain', 'the domain to look up, without protocol or path', 'string') }}"
+              },
+              {
+                "name": "size",
+                "value": "5"
+              }
+            ]
+          },
+          "sendHeaders": false,
+          "sendBody": false,
+          "options": {},
+          "optimizeResponse": false,
+          "infoMessage": ""
+        },
+        "type": "n8n-nodes-base.httpRequestTool",
+        "typeVersion": 4.5,
+        "position": [
+          -144,
+          432
+        ],
+        "id": "8cfd2d97-4672-49a5-bc65-3926889beb53",
+        "name": "check_url",
+        "rewireOutputLogTo": "ai_tool"
+      },
+      {
+        "parameters": {
+          "mode": "raw",
+          "duplicateItem": false,
+          "jsonOutput": "{\n  \"action\": \"quarantine\",\n  \"escalated_to\": \"soc-tier2\",\n  \"note\": \"Email quarantined and SOC notified\"\n}",
+          "includeOtherFields": false,
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.5,
+        "position": [
+          352,
+          -96
+        ],
+        "id": "72b276cd-68a3-47a8-b2db-7716baf7302a",
+        "name": "quarantine_and_alert"
+      },
+      {
+        "parameters": {
+          "toolDescription": "Send the triage reply to the user who reported the email.",
+          "curlImport": "",
+          "method": "POST",
+          "url": "http://localhost:5678/webhook/mock-mail",
+          "authentication": "none",
+          "provideSslCertificates": false,
+          "sendQuery": false,
+          "sendHeaders": false,
+          "sendBody": true,
+          "contentType": "json",
+          "specifyBody": "keypair",
+          "bodyParameters": {
+            "parameters": [
+              {
+                "name": "to",
+                "value": "={{ $fromAI('to', 'who should receive the triage reply', 'string') }}"
+              },
+              {
+                "name": "subject",
+                "value": "={{ $fromAI('subject', 'subject line', 'string') }}"
+              },
+              {
+                "name": "body",
+                "value": "={{ $fromAI('body', 'the verdict and reasoning', 'string') }}"
+              }
+            ]
+          },
+          "options": {},
+          "optimizeResponse": false,
+          "infoMessage": ""
+        },
+        "type": "n8n-nodes-base.httpRequestTool",
+        "typeVersion": 4.5,
+        "position": [
+          -320,
+          464
+        ],
+        "id": "f863d2d4-11af-4e21-94ce-55f61eb49842",
+        "name": "send_reply",
+        "rewireOutputLogTo": "ai_tool"
+      },
+      {
+        "parameters": {
+          "aiAgentStarterCallout": "",
+          "promptType": "define",
+          "text": "=From: {{ $json.from }}\nSubject: {{ $json.subject }}\n\nBody:\n{{ $json.body }}",
+          "hasOutputParser": true,
+          "notice": "",
+          "needsFallback": false,
+          "options": {
+            "systemMessage": "You are a phishing triage analyst for the security team.\n\nA user has forwarded a suspicious email for review.\n\nFollow these steps in order:\n1. Read the email and identify any domains, URLs or IP addresses.\n2. Use check_url and check_ip to look up what you found.\n3. Use send_reply to answer the user who forwarded the email.\n4. Return your final verdict.\n\nYou must call send_reply before returning your verdict. The user has\nno way to see your conclusion otherwise."
+          }
+        },
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "typeVersion": 3.1,
+        "position": [
+          -320,
+          0
+        ],
+        "id": "72aaf61b-8108-4ad0-9581-33db2eea494c",
+        "name": "Phishing Triage Agent"
+      },
+      {
+        "parameters": {
+          "toolDescription": "Look up geolocation and network ownership for an IPv4 address.\nReturns country, ISP, organization and ASN.",
+          "curlImport": "",
+          "method": "GET",
+          "url": "http://ip-api.com/json/{ip}",
+          "authentication": "none",
+          "provideSslCertificates": false,
+          "sendQuery": false,
+          "sendHeaders": false,
+          "sendBody": false,
+          "options": {},
+          "optimizeResponse": false,
+          "infoMessage": ""
+        },
+        "type": "n8n-nodes-base.httpRequestTool",
+        "typeVersion": 4.5,
+        "position": [
+          0,
+          416
+        ],
+        "id": "2c11eb22-adf6-419e-99da-4d081806f463",
+        "name": "check_ip"
+      }
+    ],
+    "connections": {
+      "Ollama Chat Model": {
+        "ai_languageModel": [
+          [
+            {
+              "node": "Phishing Triage Agent",
+              "type": "ai_languageModel",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "When clicking ‘Execute workflow’": {
+        "main": [
+          [
+            {
+              "node": "Phishing Triage Agent",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Structured Output Parser": {
+        "ai_outputParser": [
+          [
+            {
+              "node": "Phishing Triage Agent",
+              "type": "ai_outputParser",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "If": {
+        "main": [
+          [
+            {
+              "node": "quarantine_and_alert",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "close_case",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "check_url": {
+        "ai_tool": [
+          [
+            {
+              "node": "Phishing Triage Agent",
+              "type": "ai_tool",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "send_reply": {
+        "ai_tool": [
+          [
+            {
+              "node": "Phishing Triage Agent",
+              "type": "ai_tool",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Phishing Triage Agent": {
+        "main": [
+          [
+            {
+              "node": "If",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "check_ip": {
+        "ai_tool": [
+          [
+            {
+              "node": "Phishing Triage Agent",
+              "type": "ai_tool",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "settings": {
+      "executionOrder": "v1",
+      "binaryMode": "separate"
+    },
+    "nodeGroups": []
+  },
+  "customData": {}
+}
